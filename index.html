@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="it" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bar Coppola Cassino | Menù Digitale & Lounge</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- QRCode.js Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <!-- Canvas Confetti for Reviews -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        onyx: '#0c0d10',
+                        'onyx-card': '#14161d',
+                        'onyx-hover': '#1b1e27',
+                        gold: '#d4af37',
+                        'gold-light': '#f3e5ab',
+                        'gold-dark': '#997a15',
+                        bronze: '#8c6d3f',
+                        cream: '#f5f2eb',
+                        'cream-muted': '#a3a098'
+                    },
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif']
+                    },
+                    boxShadow: {
+                        'gold-glow': '0 0 25px -5px rgba(212, 175, 55, 0.25)',
+                        'gold-glow-lg': '0 0 35px -3px rgba(212, 175, 55, 0.4)',
+                        'inner-gold': 'inset 0 0 15px rgba(212, 175, 55, 0.15)'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0c0d10;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #d4af37;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #f3e5ab;
+        }
+        
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #f3e5ab 0%, #d4af37 50%, #aa820a 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .gold-border-gradient {
+            border-image: linear-gradient(to right, #d4af37, #8c6d3f, #d4af37) 1;
+        }
+
+        .glass-panel {
+            background: rgba(20, 22, 29, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(212, 175, 55, 0.18);
+        }
+
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-onyx text-cream font-sans antialiased min-h-screen selection:bg-gold selection:text-onyx flex flex-col">
+
+    <!-- Top Info Bar -->
+    <header class="sticky top-0 z-40 bg-onyx/90 backdrop-blur-md border-b border-gold/20 transition-all duration-300">
+        <!-- Top Bar Notice -->
+        <div class="bg-gradient-to-r from-onyx via-[#1a1710] to-onyx border-b border-gold/10 text-xs py-1.5 px-4">
+            <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2 text-cream-muted">
+                <div class="flex items-center space-x-4">
+                    <span class="flex items-center gap-1.5 text-gold"><i class="fa-solid font-xs fa-location-dot"></i> <strong class="text-cream">Corso della Repubblica 16/18, Cassino (FR)</strong></span>
+                </div>
+                <div class="flex items-center space-x-3 text-xs">
+                    <i class="fa-solid fa-phone text-gold"></i> <span class="hidden sm:inline">Prenota:</span> +39 0776 285218
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Header -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex justify-center items-center text-center">
+            <!-- Brand Logo -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-full border border-gold/60 bg-onyx-card flex items-center justify-center shadow-gold-glow group-hover:scale-105 transition duration-300">
+                    <span class="font-serif text-xl font-bold gold-gradient-text">C</span>
+                </div>
+                <div>
+                    <h1 class="font-serif text-xl sm:text-2xl font-bold tracking-wider gold-gradient-text">BAR COPPOLA</h1>
+                    <p class="text-[10px] uppercase tracking-[0.2em] text-cream-muted -mt-1">Cassino • Luxury Lounge</p>
+                </div>
+            </a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative py-10 sm:py-14 px-4 bg-gradient-to-b from-onyx via-[#121319] to-onyx border-b border-gold/10 overflow-hidden">
+        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#d4af37_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none"></div>
+        
+        <div class="max-w-4xl mx-auto text-center relative z-10 space-y-4">
+            <span class="inline-block text-gold text-xs uppercase tracking-[0.3em] px-3 py-1 rounded-full border border-gold/30 bg-gold/5">
+                Esperienza Gastronomica D'Eccellenza
+            </span>
+            <h2 class="font-serif text-3xl sm:text-5xl font-bold text-cream tracking-tight leading-tight">
+                Il Gusto del Lusso nel Cuore di Cassino
+            </h2>
+            <p class="text-cream-muted text-sm sm:text-base max-w-2xl mx-auto font-light leading-relaxed">
+                Selezioni esclusive di miscele di caffè gourmet, cocktail d'autore, alta gastronomia e distillati rari serviti in un'atmosfera senza tempo.
+            </p>
+
+            <!-- Search and Filter Section -->
+            <div class="pt-4 max-w-2xl mx-auto space-y-3">
+                <div class="relative">
+                    <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-gold/70 text-sm"></i>
+                    <input type="text" id="searchInput" oninput="handleSearch()" placeholder="Cerca tra cocktail, piatti o ingredienti (es. Negroni, Tartufo, Gin)..." 
+                           class="w-full bg-onyx-card/90 text-cream text-sm rounded-full pl-11 pr-10 py-3 border border-gold/30 focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold transition shadow-inner">
+                    <button id="clearSearch" onclick="clearSearch()" class="hidden absolute right-4 top-1/2 -translate-y-1/2 text-cream-muted hover:text-gold text-sm">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Sticky Navigation Category Tabs -->
+    <nav class="sticky top-[73px] z-30 bg-onyx/95 border-b border-gold/20 backdrop-blur-lg shadow-lg">
+        <div class="max-w-7xl mx-auto px-2 sm:px-4">
+            <div id="categoryTabs" class="flex items-center gap-2 overflow-x-auto py-3 hide-scrollbar text-xs sm:text-sm font-medium">
+                <!-- Dynamic Tabs injected via JS -->
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Menu Grid Container -->
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full space-y-12">
+        <!-- Results Banner (Hidden by default) -->
+        <div id="searchStats" class="hidden flex items-center justify-between bg-onyx-card p-4 rounded-xl border border-gold/20">
+            <p class="text-sm text-cream-muted">Risultati della ricerca per: <strong id="searchQueryTerm" class="text-gold"></strong></p>
+            <button onclick="clearSearch()" class="text-xs text-gold underline hover:text-cream">Mostra tutto il menù</button>
+        </div>
+
+        <!-- Dynamic Menu Container -->
+        <div id="menuSectionsContainer" class="space-y-14">
+            <!-- Sections rendered via JS -->
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-onyx border-t border-gold/20 py-10 px-4 text-center text-xs text-cream-muted space-y-4">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="text-left space-y-1">
+                <h3 class="font-serif text-lg font-bold gold-gradient-text">BAR COPPOLA CASSINO</h3>
+                <p>Corso della Repubblica 16/18, 03043 Cassino (FR), Italia</p>
+                <p>Tel: +39 0776 285218</p>
+            </div>
+
+            <div class="flex items-center gap-4 text-lg text-gold">
+                <a href="https://www.instagram.com/bar_coppola?obrf=Nm1sNnM2bG0xZWRs" class="w-10 h-10 rounded-full border border-gold/30 flex items-center justify-center hover:border-gold hover:bg-gold/10 transition"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://maps.app.goo.gl/2MFSjk58kbQNzNKB6" target="_blank" class="w-10 h-10 rounded-full border border-gold/30 flex items-center justify-center hover:border-gold hover:bg-gold/10 transition"><i class="fa-solid fa-map-location-dot"></i></a>
+            </div>
+        </div>
+        <div class="pt-6 border-t border-gold/10 text-stone-500 text-[11px]">
+            &copy; 2026 Bar Coppola Cassino. Tutti i diritti riservati. Menù digitale interattivo di lusso.
+        </div>
+    </footer>
+
+    <!-- Item Detail Modal -->
+    <div id="itemModal" class="fixed inset-0 z-50 flex items-center justify-center bg-onyx/80 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300 p-4">
+        <div class="glass-panel max-w-lg w-full rounded-2xl overflow-hidden shadow-gold-glow-lg border border-gold/40 relative transform scale-95 transition-transform duration-300" id="itemModalBox">
+            <button onclick="closeItemModal()" class="absolute top-3 right-3 z-10 w-8 h-8 rounded-full bg-onyx/80 text-cream hover:text-gold border border-gold/30 flex items-center justify-center transition">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div id="modalContent">
+                <!-- Content injected dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Data and Controller -->
+    <script>
+        // Menu Data Categories & Items
+        const MENU_CATEGORIES = [
+            { id: 'colazione', name: 'Colazione', icon: 'fa-mug-hot', desc: 'Espressi d\'autore, lievitati artigianali e bevande da colazione' },
+            { id: 'gastronomia', name: 'Gastronomia & Pasticceria', icon: 'fa-utensils', desc: 'Crostata, tramezzini, pizzette, burger e proposte salate' },
+            { id: 'soft-drinks', name: 'Soft Drinks', icon: 'fa-glass-water', desc: 'Bibite, acque minerali, spremute ed estathé' },
+            { id: 'birre', name: 'Birre', icon: 'fa-beer-mug-empty', desc: 'Selezione di birre in bottiglia e artigianali' },
+            { id: 'cocktail-alcolici', name: 'Cocktail Alcolici', icon: 'fa-martini-glass-citrus', desc: 'Mixology d\'eccellenza, spritz, classici e shot' },
+            { id: 'cocktail-analcolici', name: 'Mocktails', icon: 'fa-wine-glass-empty', desc: 'Creazioni analcoliche raffinate e rinfrescanti' },
+            { id: 'amari', name: 'Amari & Liquori', icon: 'fa-whiskey-glass', desc: 'Liquori tradizionali italiani, amari e distillati' },
+            { id: 'vini', name: 'Vini Bianchi & Rossi', icon: 'fa-wine-bottle', desc: 'Cantina selezionata: etichette locali, nazionali e Champagne' },
+            { id: 'aperitivi', name: 'Aperitivi & Taglieri', icon: 'fa-cheese', desc: 'Taglieri caldi e freddi, degustazioni e aperitivi dello Chef' }
+        ];
+
+        const MENU_ITEMS = [
+            // COLAZIONE
+            { id: 101, category: 'colazione', name: 'Espresso', price: 1.20, desc: 'Tostatura artigianale Coppola dal gusto equilibrato.', tags: ['Popolare'], img: 'https://images.unsplash.com/photo-1579992357154-faf4bde95b3d?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D' },
+            { id: 144, category: 'colazione', name: 'Caffè Decaffeinato', price: 1.40, desc: 'Miscela decaffeinata delicata ed aromatica.', img: 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=400&q=80' },
+            { id: 145, category: 'colazione', name: 'Caffè Americano', price: 2.00, desc: 'Espresso allungato servito in tazza grande.', img: 'https://images.unsplash.com/photo-1689421755219-9fa78fcc5b56?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D' },
+            { id: 146, category: 'colazione', name: 'Caffè Macchiato (Soia / Zimil)', price: 1.40, desc: 'Espresso macchiato con latte di soia o senza lattosio.', img: 'https://images.unsplash.com/photo-1485808191679-5f86510681a2?auto=format&fit=crop&w=400&q=80' },
+            { id: 147, category: 'colazione', name: 'Orzo Piccolo', price: 1.60, desc: 'Bevanda biologica all\'orzo tostato.', img: 'https://media.istockphoto.com/id/2247360654/fr/photo/lorzo-est-une-boisson-de-c%C3%A9r%C3%A9ales-torr%C3%A9fi%C3%A9es-sans-caf%C3%A9ine-fabriqu%C3%A9e-%C3%A0-partir-dorge-moulue.webp?a=1&b=1&s=612x612&w=0&k=20&c=dAPl8eR6YzsafOAgO3bwXG5PqYEI8DkPJkYfVHvV6v4=' },
+            { id: 1491, category: 'colazione', name: 'Orzo Grande', price: 2.00, desc: 'Tazza grande di orzo biologico tostato.', img: 'https://media.istockphoto.com/id/2247360654/fr/photo/lorzo-est-une-boisson-de-c%C3%A9r%C3%A9ales-torr%C3%A9fi%C3%A9es-sans-caf%C3%A9ine-fabriqu%C3%A9e-%C3%A0-partir-dorge-moulue.webp?a=1&b=1&s=612x612&w=0&k=20&c=dAPl8eR6YzsafOAgO3bwXG5PqYEI8DkPJkYfVHvV6v4=' },
+            { id: 0, category: 'colazione', name: 'Ginseng Piccolo', price: 1.60, desc: 'Caffè al ginseng cremoso e rinvigorente.', img: 'https://media.istockphoto.com/id/529176237/fr/photo/tasse-de-ginseng.webp?a=1&b=1&s=612x612&w=0&k=20&c=tjnw_kvrV0rVzI6zTu7NAiqFETnllCzE9xydFLaCmhI=' },
+            { id: 1492, category: 'colazione', name: 'Ginseng Grande', price: 2.50, desc: 'Tazza grande di ginseng solare dal gusto avvolgente.', img: 'https://media.istockphoto.com/id/529176237/fr/photo/tasse-de-ginseng.webp?a=1&b=1&s=612x612&w=0&k=20&c=tjnw_kvrV0rVzI6zTu7NAiqFETnllCzE9xydFLaCmhI=' },
+            { id: 471, category: 'colazione', name: 'Ginseng Amaro', price: 1.70, desc: 'Estratto di ginseng senza zuccheri aggiunti.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwoFtq_V_JItkdso4UzNioVZOwggu448RG1IHlKCO2RQ&s=10' },
+            { id: 472, category: 'colazione', name: 'Ginseng Amaro Grande', price: 2.00, desc: 'Tazza grande di ginseng amaro puro.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwoFtq_V_JItkdso4UzNioVZOwggu448RG1IHlKCO2RQ&s=10' },
+            { id: 150, category: 'colazione', name: 'Caffè Marocchino', price: 2.00, desc: 'Espresso, spolverata di cacao amaro e schiuma di latte.', img: 'https://images.unsplash.com/photo-1572442388796-11668a67e53d?auto=format&fit=crop&w=400&q=80' },
+            { id: 152, category: 'colazione', name: 'Cappuccino Classico', price: 1.60, desc: 'Espresso e vellutata schiuma di latte fresco.', img: 'https://images.unsplash.com/photo-1534778101976-62847782c213?auto=format&fit=crop&w=400&q=80' },
+            { id: 153, category: 'colazione', name: 'Cappuccino (Deca / Orzo / Ginseng)', price: 2.00, desc: 'Cappuccino speciale a scelta con deca, orzo o ginseng.', img: 'https://images.unsplash.com/photo-1534778101976-62847782c213?auto=format&fit=crop&w=400&q=80' },
+            { id: 154, category: 'colazione', name: 'Cappuccino (Soia / Zimil)', price: 2.00, desc: 'Cappuccino preparato con latte di soia o senza lattosio.', img: 'https://images.unsplash.com/photo-1534778101976-62847782c213?auto=format&fit=crop&w=400&q=80' },
+            { id: 151, category: 'colazione', name: 'Ice Cappuccino', price: 2.00, desc: 'Cappuccino freddo shakerato con ghiaccio.', img: 'https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=400&q=80' },
+            { id: 570, category: 'colazione', name: 'Ice Cappuccino Caramello', price: 2.50, desc: 'Cappuccino freddo con goloso topping al caramello.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuDf4saM6OpLw2jhB2MsCqiMIg2rMV2HQMUb6SGf43aQ&s=10' },
+            { id: 572, category: 'colazione', name: 'Ice Cappuccino Cioccolato', price: 2.50, desc: 'Cappuccino freddo con topping al cioccolato fondente.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSR80So2T_9ZOVbdJEv3dFXVnXXlMjTYEOVmlwyfg3pKg&s=10' },
+            { id: 571, category: 'colazione', name: 'Ice Americano', price: 2.00, desc: 'Espresso doppio servito freddo su cubetti di ghiaccio.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWbUe3fVKpSCY_CfrbYC1mpMlRQzUvD3g493URfUnisw&s=10' },
+            { id: 155, category: 'colazione', name: 'Mini Ciambella', price: 1.50, desc: 'Soffice ciambellina fritta zuccherata.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOBaCOXD7Y-zaNRK__8J2OEKzMUEy6hNvzpeo0nyxcsw&s=10' },
+            { id: 156, category: 'colazione', name: 'Latte Bianco', price: 1.50, desc: 'Bicchiere di latte fresco caldo o freddo.', img: 'https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&w=400&q=80' },
+            { id: 157, category: 'colazione', name: 'Latte Macchiato', price: 1.60, desc: 'Latte caldo con una goccia di espresso.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzZ8SVILrV6mlVPnG_PTJmHmmj4Sg05eLVyNp9DgKkWw&s=10' },
+            { id: 158, category: 'colazione', name: 'Caffè Shakerato', price: 2.00, desc: 'Espresso shakerato con ghiaccio e zucchero di canna.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8QUy2709V3JHQDw-r025kfrkSejxlhs96dPBpPJvM6Q&s=10' },
+            { id: 160, category: 'colazione', name: 'Cioccolata Calda', price: 3.50, desc: 'Densa e cremosa cioccolata calda tradizionale.', img: 'https://images.unsplash.com/photo-1542990253-0d0f5be5f0ed?auto=format&fit=crop&w=400&q=80' },
+            { id: 164, category: 'colazione', name: 'Spremuta Fresca d\'Arancia', price: 3.50, desc: 'Spremuta espressa di arance selezionate.', tags: ['Vegano'], img: 'https://images.unsplash.com/photo-1613478223719-2ab802602423?auto=format&fit=crop&w=400&q=80' },
+            { id: 186, category: 'colazione', name: 'Caffè Doppio', price: 2.40, desc: 'Doppia estrazione di espresso intenso.', img: 'https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?auto=format&fit=crop&w=400&q=80' },
+            { id: 208, category: 'colazione', name: 'Cornetto Classico', price: 1.50, desc: 'Lievitato artigianale sfogliato al burro.', img: 'https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=400&q=80' },
+            { id: 289, category: 'colazione', name: 'Cornetto Farcito', price: 1.80, desc: 'Cornetto farcito al momento (crema, cioccolato, marmellata).', img: 'https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=400&q=80' },
+            { id: 276, category: 'colazione', name: 'Crema Caffè', price: 3.00, desc: 'Vellutata crema fredda al caffè da cucchiaino.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9lYeWjRVSmfcy6QIRrIwbX3ODaWxvm6qZP-Gc3INf1A&s=10' },
+            { id: 708, category: 'colazione', name: 'Latte e Menta', price: 2.50, desc: 'Bevanda rinfrescante con latte fresco e sciroppo di menta.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSldcAGJPx1A14jOh2k4VVbij2__yOh9HMFTVfMIOnaQ&s=10' },
+
+            // PASTICCERIA E GASTRONOMIA
+            { id: 76, category: 'gastronomia', name: 'Fetta Crostata', price: 2.50, desc: 'Crostata artigianale con confettura di frutta.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmFT2ttszmqT4kIXM-d7hx6xDFNdwOJaAcwodeGRzmBQ&s=10' },
+            { id: 80, category: 'gastronomia', name: 'Tramezzini Assortiti', price: 3.00, desc: 'Tramezzino soffice con farcitura ricca del giorno.', img: 'https://images.unsplash.com/photo-1528735602780-2552fd46c7af?auto=format&fit=crop&w=400&q=80' },
+            { id: 82, category: 'gastronomia', name: 'Cornetto Cereali Farcito', price: 3.50, desc: 'Cornetto ai cereali e miele farcito a scelta.', img: 'https://images.unsplash.com/photo-1530610476181-d83430b64dcd?auto=format&fit=crop&w=400&q=80' },
+            { id: 416, category: 'gastronomia', name: 'Biscotto al Farro', price: 2.00, desc: 'Biscotto salutistico al farro biologico.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-8g9ZLw6GbeLff2d0m4hEYZHTgH1mzArjlOCT4mxcLg&s=10' },
+            { id: 417, category: 'gastronomia', name: 'Mini Crostatina', price: 1.00, desc: 'Fragante mini crostatina di pasta frolla.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQ_GPPcR8n8AOU1GZh71KagLFR4PHOosVLZCqe6g9QFA&s=10' },
+            { id: 695, category: 'gastronomia', name: 'La Pizza Lingua', price: 3.00, desc: 'Pizza a lingua croccante e fragrante.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQoeIr7g7djxxTmkzWRCn_pvXn4VJKQbwbdK7qtA0Z6tw&s=10' },
+            { id: 696, category: 'gastronomia', name: 'La Pizza Lingua Meta', price: 2.00, desc: 'Porzione mezza di pizza a lingua.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQoeIr7g7djxxTmkzWRCn_pvXn4VJKQbwbdK7qtA0Z6tw&s=10' },
+
+            // SOFT DRINKS
+            { id: 25, category: 'soft-drinks', name: 'Coca Cola', price: 3.00, desc: 'Servita fredda in bottiglia di vetro.', img: 'https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&w=400&q=80' },
+            { id: 26, category: 'soft-drinks', name: 'Coca Cola Zero', price: 3.00, desc: 'Gusto originale Coca-Cola senza zuccheri.', img: 'https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&w=400&q=80' },
+            { id: 27, category: 'soft-drinks', name: 'Chinotto', price: 3.00, desc: 'La classica bibita italiana dal sapore amabile e retrò.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhyJ50t6xrs7D3zPQZ1sPH6FKSw2n2U4FiC9BcdRXA2A&s=10' },
+            { id: 28, category: 'soft-drinks', name: 'Cedrata Tassoni', price: 3.50, desc: 'Storica cedrata frizzante e rinfrescante.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGz9aqtLvL_skU80hXnItwt6YL4Ipzn_ptCmDMJ-NsEg&s=10' },
+            { id: 31, category: 'soft-drinks', name: 'Crodino', price: 3.00, desc: 'L\'analcolico biondo fa l\'aperitivo.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtHBAkOPA6TFWx6GrIO2TM9qMdUZJ1HfYoaFSUujPIww&s=10' },
+            { id: 32, category: 'soft-drinks', name: 'Aperol Soda', price: 3.50, desc: 'Bibita aperitiva frizzante monodosata.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3LBHLgL-e8EnemdEmxf5oVNbe4DZlliFKik1gtzrPzQ&s=10' },
+            { id: 33, category: 'soft-drinks', name: 'Campari Soda', price: 3.50, desc: 'L\'iconico aperitivo monodose monoblocco.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkgyeFhoi4eJgwjiv18ETo0ETHuCZ-t-UcqSLuJc5vsA&s=10' },
+            { id: 34, category: 'soft-drinks', name: 'Bitter Rosso', price: 3.00, desc: 'Aperitivo analcolico bitter rosso.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0nHJkw3qrP3XpGcSyss76Xn4Vf9JbRDLYzBdLt1eX6A&s=10' },
+            { id: 35, category: 'soft-drinks', name: 'Bitter Bianco', price: 3.00, desc: 'Aperitivo analcolico bitter bianco.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRaLnegfW_2K6s1yf3ou6pS0tFWFHkAoiUv5BgAPRnMiw&s=10' },
+            { id: 37, category: 'soft-drinks', name: 'Estathé al Limone', price: 3.00, desc: 'Infuso di tè al limone.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRc-67_NByaTanvHQ4Mjx2ISZ8A8YAd8Rz-MLMFpaXIaw&s=10' },
+            { id: 38, category: 'soft-drinks', name: 'Estathé alla Pesca', price: 3.00, desc: 'Infuso di tè alla pesca.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR95Za6aAbiKoqo53YXB8NSxZfAdbvL37glV_lxtZG4JQ&s=10' },
+            { id: 39, category: 'soft-drinks', name: 'Succo di Frutta Assortito', price: 3.00, desc: 'Scegli tra pera, pesca, albicocca o ace...', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAQXpsww_6pP6FguGHWaIyJajox_eAQv2L6GRLnRWZTQ&s=10' },
+            { id: 40, category: 'soft-drinks', name: 'Succo Mirtillo / Pesca & Mango', price: 3.50, desc: 'Nettare gourmet di mirtillo o pesca e mango.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRglXtnSVW9MWctxjUpI7KQgfh2C9RPyrDaMH79WGPzRA&s=10' },
+            { id: 139, category: 'soft-drinks', name: 'Aperoltas', price: 6.00, desc: 'Mix di Aperol e Cedrata Tassoni.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUIj3bgDQ0HmAZlCI4gZNNsJonpStc0ce2qZPOYL2mFQ&s=10' },
+            { id: 206, category: 'soft-drinks', name: 'Lemon Soda', price: 3.00, desc: 'Bibita gassata al succo di limone.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQauNjX2W645cA_xUocernIdkxwn5glsxr9buRRcjXAUQ&s=10' },
+            { id: 269, category: 'soft-drinks', name: 'Red Bull Energy Drink', price: 4.00, desc: 'Energy drink servito freddo.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMwrJgi8soPKfCj5IaExG3QXMTEkA8JfCcHRAGjAo8iA&s=10' },
+            { id: 278, category: 'soft-drinks', name: 'Oransoda', price: 3.00, desc: 'Bibita gassata al succo d\'arancia.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTr66Y4GMSUTCJRmL876I3pmLqKSE194pBRs6fwXLA9Mw&s=10' },
+            { id: 281, category: 'soft-drinks', name: 'Fanta Orange', price: 3.00, desc: 'Bibita gassata all\'arancia.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQErx_efFgdhP97B8kcM0uQ9jucKDl8-41nMfh6nq-jSw&s' },
+            { id: 282, category: 'soft-drinks', name: 'San Pellegrino Bianco', price: 3.50, desc: 'Bibita frizzante aperitiva.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcUpdqLQysr_A5ss5LDG15vIRItVFSPqwUSH-Vz86ARg&s=10' },
+            { id: 704, category: 'soft-drinks', name: 'San Pellegrino Rosso', price: 3.50, desc: 'Bibita gassata aperitiva rossa.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMZF3aDaTl8_5G9Ww2yQXF0ZaI5CilYalFxJYOPfNZtg&s=10' },
+            { id: 287, category: 'soft-drinks', name: 'Schweppes Arancia', price: 3.00, desc: 'Schweppes frizzante all\'arancia.', img: 'https://www.bevisrl.com/components/com_jshopping/files/img_products/schweppes_arancio.webp' },
+            { id: 707, category: 'soft-drinks', name: 'Schweppes Limone', price: 3.00, desc: 'Schweppes frizzante al limone.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlVYCPO1BccdAsTuJjJ9vVmOdU9XD5ZPdIyxSvu7IcLj7V-MnqDeec-7k&s=10' },
+            { id: 460, category: 'soft-drinks', name: 'Fever-Tree Tonic Water', price: 4.00, desc: 'Tonica premium per miscelazione.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuJrTtVh5Llp4ejGMm4jPhaWmvoR7d59eeIGHV2TpBVg&s=10' },
+            { id: 553, category: 'soft-drinks', name: 'Sprite', price: 3.00, desc: 'Bibita gassata gusto limone e lime.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjjVbsuYrAxXbA4VZxzCFE5Yff571i_9PoLhp9XlZcAw&s=10' },
+            { id: 573, category: 'soft-drinks', name: 'Acqua e Menta', price: 3.00, desc: 'Acqua fresca dissetante con sciroppo di menta.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRj8KSeYmAznDfixTLTaz3413W0s-pXJk-sc8npON6pw&s=10' },
+            { id: 580, category: 'soft-drinks', name: 'Ginger Beer', price: 4.00, desc: 'Soda allo zenzero piacevolmente piccante.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBq72ibaaiAPWiyqFkfbE_pIXznMZh_JFHUIs4KbdDmQ&s=10' },
+
+            // BIRRE
+            { id: 65, category: 'birre', name: 'Ichnusa Non Filtrata', price: 4.00, desc: 'Birra sarda dorata a bassa fermentazione.', tags: ['Popolare'], img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRxlRtV4YMOM77N0sp0WourzlxRyVjil8IpG3RWIw8ew&s=10' },
+            { id: 368, category: 'birre', name: 'Birra Messina ', price: 4.00, desc: 'Lager ricetta con cristalli di sale siciliano.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrmS5EaCo1fPQ5Rr1I-gRGhW08uTa_eZjDb3Xh85G88w&s=10' },
+            { id: 370, category: 'birre', name: 'Corona Extra ', price: 4.00, desc: 'Lager messicana servita con fettina di lime.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0PKJ0_2xwRRcr9tvddO17MqEYmrP7lIY8NaFlon7UNA&s=10' },
+            { id: 396, category: 'birre', name: 'Nastro Azzurro ', price: 3.00, desc: 'La premium lager italiana per eccellenza.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRk1hS3dyC29WJ-VmTN5dh86ydkKOuwDcvygfue3OkLSA&s=10' },
+            { id: 575, category: 'birre', name: 'Tennent\'s Super', price: 4.00, desc: 'Strong lager scozzese dal carattere deciso.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmqnpeWPJqTwzXhdUEArU3ij-vhcfWqOxGgo_MDGrlvw&s=10' },
+            { id: 576, category: 'birre', name: 'Heineken', price: 3.50, desc: 'Lager internazionale a fermentazione pura.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQG4eOmy4unjT3edCsJRniWIGXosm57sCuY6BtMAbaUg&s=10' },
+            { id: 657, category: 'birre', name: 'Beck\'s 33', price: 3.00, desc: 'Pilsner tedesca dal sapore luppolato.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIajuosNxhDmfyP7E-pg-KgK78ygmxp64p-A8dZFLg7A&s=10' },
+            { id: 691, category: 'birre', name: 'Forst V.I.P 0.30L', price: 3.50, desc: 'Birra chiara altoatesina dal gusto raffinato.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQ3Yzlz1NlPYoMNYY1bEubNIGfWr8GcyGTKZZELofBiQ&s=10' },
+            { id: 692, category: 'birre', name: 'Forst V.I.P 0.50L', price: 5.50, desc: 'Forst V.I.P formato media da 50cl.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtS8RhdvZb-uimkY9xa86GaWeRwKeniqdaaRAQRf-Row&s=10' },
+            { id: 693, category: 'birre', name: 'Forst SixTus 0.30L', price: 4.00, desc: 'Doppio malto scura dai toni caramellati.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWhMSJx4p_dEuiWhIUNszykVpmb_JHHLljGtQ1IyH_LA&s=10' },
+            { id: 694, category: 'birre', name: 'Forst SixTus 0.50L', price: 6.00, desc: 'Doppio malto scura formato grande da 50cl.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnTmc_1ngwSh-EGoNEOQItMHslPFFK6xdDUfDB8IyYrQ&s=10' },
+
+            // COCKTAIL ALCOLICI
+            { id: 84, category: 'cocktail-alcolici', name: 'Sex on the Beach', price: 8.00, desc: 'Vodka, liquore alla pesca, succo d\'arancia e mirtillo.', img: 'https://lh5.googleusercontent.com/proxy/Z8ob2vRAOWFYFAqtTzE5l9kgk-tbHN8U6HXtsY8v5uItFbp9ODGrMBKRVh1dK4zDBSjfhKWtFxj8aJ-8FHgfBYwYuVRyS3nCYIFx_fcdGpHeWYW44lR7gGuBn34zg6HF0ichTE_I-EtJ8_6ZkT4gMwfabKqHTB5JZto' },
+            { id: 87, category: 'cocktail-alcolici', name: 'Porn Star Martini', price: 7.00, desc: 'Vodka alla vaniglia, frutto della passione, lime e shot prosecco.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnXEHCzFC6FO20GO8BGDJPre1aDXETFieJiwdW-lXrwg&s=10' },
+            { id: 88, category: 'cocktail-alcolici', name: 'Piña Colada', price: 8.00, desc: 'Rum bianco, crema di cocco e succo d\'ananas.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThMTsFq3miipXqNiqtMtCVNftZ--AcVbguw0-v0hCECQ&s=10' },
+            { id: 90, category: 'cocktail-alcolici', name: 'Negroni Sbagliato', price: 7.00, desc: 'Campari, Vermouth rosso e Prosecco DOCG.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRD4alsh2yfVb41rkW0Fm57QiCAO6wUlSk8xqH0LQsZ3Q&s=10' },
+            { id: 91, category: 'cocktail-alcolici', name: 'Vodka Red Bull', price: 7.00, desc: 'Vodka premium e Red Bull energy drink.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtwPIR9IxKIDI29TsTUO7oOZK5Dyk5Pn38wUvMYxZt0Q&s=10' },
+            { id: 92, category: 'cocktail-alcolici', name: 'Bloody Mary', price: 9.00, desc: 'Vodka, succo di pomodoro, lime, tabasco e worcestershire.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUlferF0BC1B24YSN86lO1Qy8PNkhUvIjouBY0FTCMJA&s=10' },
+            { id: 103, category: 'cocktail-alcolici', name: 'Aperol Spritz', price: 7.00, desc: 'Aperol, Prosecco DOCG, soda ed arancia.', tags: ['Popolare'], img: 'https://images.unsplash.com/photo-1560512823-829485b8bf24?auto=format&fit=crop&w=400&q=80' },
+            { id: 104, category: 'cocktail-alcolici', name: 'Campari Spritz', price: 7.00, desc: 'Campari, Prosecco DOCG e splash di soda.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBXJ9f2u2uSz1yoXawld9iow32r7AJbL4P0MWLdJs7ag&s=10' },
+            { id: 107, category: 'cocktail-alcolici', name: 'Moscow Mule', price: 8.00, desc: 'Vodka, succo di lime e Ginger Beer.', tags: ['Popolare'], img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZzd-z6XBnk5evHGj9XuCGPQrpLLU-8qsEJxS494lWug&s=10' },
+            { id: 108, category: 'cocktail-alcolici', name: 'Gin Tonic', price: 8.00, desc: 'Gin selezionato e acqua tonica premium.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRs5JE4yx-tdSvdLVRSublwCovpWpDstOZVhvhvYNqfmA&s=10' },
+            { id: 187, category: 'cocktail-alcolici', name: '1/2 Negroni', price: 4.00, desc: 'Porzione mezza dell\'iconico Negroni.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4I8AeCQcHkXW4CaFupaUTk8CX2mCGc5_pPx9XCY_Gmw&s=10' },
+            { id: 188, category: 'cocktail-alcolici', name: 'Mojito Classico', price: 8.00, desc: 'Rum bianco, menta fresca, lime e zucchero di canna.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcISGWDMVfWQsT3Va7Qq9sASDBKkOXiLhohbXaZSCDag&s=10' },
+            { id: 189, category: 'cocktail-alcolici', name: 'Negroni Classico', price: 7.00, desc: 'Campari, Gin e Vermouth rosso Cocchi.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTopLJ3-2Bw6_LgwDT12nWmZk9iX3ewMeO-cEHQ_Bt8RA&s=10' },
+            { id: 205, category: 'cocktail-alcolici', name: 'Campari Soda e Prosecco', price: 6.00, desc: 'Campari Soda allungato con Prosecco frizzante.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRYSuUGqlzBj2i94sqFebjvuIm16UaLu41ojPfQZrn5A&s=10' },
+            { id: 234, category: 'cocktail-alcolici', name: 'Hugo Spritz', price: 8.00, desc: 'Prosecco, sciroppo di fiori di sambuco, menta e soda.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVVA8qGvcJR2cz-3gA8sszmZUITen00lSAfOOKzHFrpw&s=10' },
+            { id: 235, category: 'cocktail-alcolici', name: 'Vodka Lemon', price: 8.00, desc: 'Vodka e Lemon Soda servita con ghiaccio.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQB7V1tnHkvGZvCO-Lys53SevJxWE_U5Yw_eD1QoFE7Dg&s=10' },
+            { id: 279, category: 'cocktail-alcolici', name: 'Gin Lemon', price: 7.00, desc: 'Gin fresco e limonata gassata.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgO9LZelYReuPto9Yq3NW6EiOkQad8zxRgh0jKWeT3GQ&s=10' },
+            { id: 470, category: 'cocktail-alcolici', name: 'Martini Prosecco', price: 8.00, desc: 'Vermouth Martini con top di Prosecco.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGjkCP_qYK3pl1txp7wuvkqVzogyJ-QyAiJc2orMUYdw&s=10' },
+            { id: 579, category: 'cocktail-alcolici', name: 'Limoncello Spritz', price: 8.00, desc: 'Limoncello di Sorrento, Prosecco e soda.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThqwV9qs9zRoW43bYAEEaLZnMmvu6m4qPLN-dFJ1nesQ&s=10' },
+            { id: 581, category: 'cocktail-alcolici', name: 'Martini Bianco', price: 4.00, desc: 'Servito liscio o con ghiaccio e scorza di limone.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYIIoTjgB_FfWBayhMZg4Gsv7D0pP4BRAYrRCS2BFd-Q&s=10' },
+            { id: 586, category: 'cocktail-alcolici', name: 'Whisky Sour', price: 8.00, desc: 'Bourbon whisky, succo di limone e sciroppo di zucchero.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7AhhNf3hOfmXg8y0VLUjbijIuQzX3nM4XHxThuAGr_g&s=10' },
+            { id: 591, category: 'cocktail-alcolici', name: 'Coca e Malibu', price: 7.00, desc: 'Malibu al cocco e Coca-Cola ghiacciata.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTytKxP1WlFkhD1e4212O3b6i7B94yWBgw0aZZrtQDqGg&s=10' },
+            { id: 666, category: 'cocktail-alcolici', name: 'Cuba Libre', price: 7.00, desc: 'Rum scuro, Coca-Cola e succo di lime fresco.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSopKmc6eExsVGrd7umNA8wiDmlSJn9K71ekLVtXj0HlA&s=10' },
+            { id: 671, category: 'cocktail-alcolici', name: 'Margarita', price: 7.00, desc: 'Tequila, Cointreau e succo di lime con bordo salato.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQC51nWtj3EuXDfWfsQF0dB-SUTb7IV-4qvjXs7Sz-vOw&s=10' },
+            { id: 675, category: 'cocktail-alcolici', name: 'Bellini', price: 7.00, desc: 'Prosecco DOCG e polpa di pesca fresca.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRr06dpRS9prtYQx9Gt8NOBWnmywcRPsZje0DJGdnU8Pw&s=10' },
+            { id: 698, category: 'cocktail-alcolici', name: 'Bloodyberry', price: 7.00, desc: 'Cocktail d\'autore ai frutti rossi e vodka.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3PPtj2AsfxYB0wN9TykzZYAPJc_OYuCRTACyBCP5WoA&s=10' },
+            { id: 709, category: 'cocktail-alcolici', name: 'Shot Tequila', price: 4.00, desc: 'Chupito di Tequila servito con sale e limone.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRqK9xV_-RLvsK9srWDkytJ1CfOVvo37wVkAv4_4urdA&s=10' },
+            { id: 710, category: 'cocktail-alcolici', name: 'Shot Tequila Mezzo', price: 2.00, desc: 'Mezzo shot di Tequila.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcREyhSh_CY1RMow8eC27iW8OGX3IwM6LzdnPki8WjxFHg&s=10' },
+
+            // MOCKTAILS (COCKTAIL ANALCOLICI)
+            { id: 94, category: 'cocktail-analcolici', name: 'Salvador Mocktail', price: 6.00, desc: 'Mix di succhi esotici e granatina.', tags: ['Vegano'], img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpRzBzJwQFteVMrKQBNd63GqZMOsy0jLZhFP9gc-hePw&s=10' },
+            { id: 95, category: 'cocktail-analcolici', name: 'Gauguin Mocktail', price: 6.00, desc: 'Aperitivo analcolico alla frutta tropicale.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIT5VxYgl7WDbWo60JGwWmpTGwXAh-Sk1-LiTIXDIijw&s=10' },
+            { id: 96, category: 'cocktail-analcolici', name: 'Pablito Mocktail', price: 6.00, desc: 'Bevanda rinfrescante agrumata analcolica.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTeLDnMfeC-ITIbrtH9Hu4Wa5MNW3DKp4Ox31DHrk5j9A&s=10' },
+            { id: 175, category: 'cocktail-analcolici', name: 'Virgin Mojito', price: 7.00, desc: 'Menta, lime, zucchero di canna e Ginger Ale.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMP5Kgne9LMYWCvrVlGUNhYF5GAqQPw9cNrjfVc8pMjQ&s=10' },
+            // AMARI & LIQUORI
+            { id: 402, category: 'amari', name: 'Jefferson', price: 5.00, desc: 'Amaro calabrese premiato con agrumi e botaniche.', tags: ['Popolare'], img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxLr9fUXIl-BE_VGWZlCx5fjAeI4VxJ4HTcnTSuDYrOA&s=10' },
+            { id: 487, category: 'amari', name: 'Jägermeister', price: 4.00, desc: 'Liquore tedesco alle 56 erbe servito ghiacciato.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJ-CzTtingL0hx3ReTG1AV-7KD2rvQc2IBHSERCrOZJw&s=10' },
+            { id: 488, category: 'amari', name: 'Amaro del Capo', price: 4.00, desc: 'Liquore d\'erbe servito a -20°C.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgpiym4LteBpPtT4IGaHhJSbJw3FOWagqG_FuWR_N_cw&s=10' },
+            { id: 489, category: 'amari', name: 'Amaro Averna', price: 4.00, desc: 'Storico amaro siciliano dalle note di agrumi e liquirizia.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuCpVzC3qJ5nSXNJlOrSX3UYmuCDUQYn_eT-LG8eXVJw&s=10' },
+            { id: 491, category: 'amari', name: 'Fernet Branca', price: 4.00, desc: 'Amaro digestivo intenso a base d\'erbe.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT63NrDTamPkQNOgBpxboZUpl3-KHc_GF6BEEI5huZF-g&s=10' },
+            { id: 493, category: 'amari', name: 'Amaro Montenegro', price: 4.00, desc: 'Sapore vero, liquore con 40 erbe botaniche.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9Shl1phrImX3uo6aPLninOl8S_0tvQ0FXvlnR67OrYg&s=10' },
+            { id: 494, category: 'amari', name: 'Limoncello', price: 4.00, desc: 'Liquore tradizionale ai limoni italiani.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR77Stc-0OxfcBSCFGReSmSLibPXqjjknJCvt5NOmiJKg&s=10' },
+            { id: 496, category: 'amari', name: 'Baileys Irish Cream', price: 4.00, desc: 'Crema di whisky irlandese e cacao.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgorsjpx773TpHrjNvTqnlp0dhONkOc1vYcNuXAWk0iA&s=10' },
+            { id: 498, category: 'amari', name: 'Sambuca', price: 3.00, desc: 'Liquore dolce all\'anice stellato.', img: 'https://m.media-amazon.com/images/I/813GfFI3XWL.jpg' },
+            { id: 584, category: 'amari', name: 'Disaronno Originale', price: 4.00, desc: 'Liquore alle mandorle e spezie nobili.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjLb7yfl8r-uViqnf6MCr5oSYtZfq3Je_2HgFaNNT4gg&s=10' },
+            { id: 585, category: 'amari', name: 'Malibu', price: 2.00, desc: 'Liquore al rum e noce di cocco.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5o0MCtASukKn32EeocNFvGOA983u-1q5tJDFzEgAHyw&s=10' },
+            { id: 587, category: 'amari', name: 'Petrus Boonekamp', price: 4.00, desc: 'L\'amaro digestivo per eccellenza.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiMOVLcOGFc9HygdNXExrPvQ-MjQPJdpg1AtAq3SGG0Q&s=10' },
+            { id: 718, category: 'amari', name: 'Absolut Vodka', price: 5.00, desc: 'Vodka svedese pura servita in shot o liscio.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAyen9ocyboq_RfwKhaDbNfYAbyBcuddwgq9RGC8wFGg&s' },
+
+            // VINI BIANCHI, ROSSI & BOLLICINE (SOLO AL CALICE)
+            { id: 630, category: 'vini', name: 'Conegliano Valdobbiadene (Calice)', price: 6.00, desc: 'Prosecco Superiore DOCG dal perlage fine e profumo fruttato.', tags: ['Bollicine'], img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSakGUzxCMUgR4qp8Qx6iTYU0JAoChQI1-LHx0d25UmQ&s=10' },
+            { id: 632, category: 'vini', name: 'Berlucchi Franciacorta (Calice)', price: 8.00, desc: 'Franciacorta DOCG elegante, fresco con note di crosta di pane e agrumi.', tags: ['Bollicine', 'Popolare'], img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-fTjSVLGxm1IQb45kTGtfJkf10RIC-95EjYOhA5waHQ&s=10' },
+            { id: 634, category: 'vini', name: 'Berlucchi Rosè (Calice)', price: 9.00, desc: 'Franciacorta Rosè elegante con note di frutti di bosco e grande freschezza.', tags: ['Bollicine', 'Rosé'], img: 'https://images.unsplash.com/photo-1558001373-7b93ee48ffa0?auto=format&fit=crop&w=400&q=80' },
+            { id: 638, category: 'vini', name: 'Pinot Grigio Rosè (Calice)', price: 8.00, desc: 'Rosato dal colore tenue, fresco, minerale e piacevolmente fruttato.', tags: ['Rosé'], img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRitRZ-wEZKBhZ3LqzLQz-x5HLJCQ6u2ydvs7NlsUapfQ&s=10' },
+            { id: 644, category: 'vini', name: 'Vermentino (Calice)', price: 7.00, desc: 'Bianco mediterraneo solare, sapido con sentori di erbe aromatiche.', tags: ['Vino Bianco'], img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHBkL2ud2lfZmvxqJBdnPPNi0gBFIJmavWx1JVGsqDIA&s=10' },
+            { id: 646, category: 'vini', name: 'Ribolla Gialla (Calice)', price: 7.00, desc: 'Vino friulano dalla spiccata acidità e note floreali.', tags: ['Vino Bianco'], img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ28d8q97lTXtPrwqdntUD1Pd48OOERvqDEKmZwxZEgFg&s=10' },
+            { id: 648, category: 'vini', name: 'Gewürztraminer (Calice)', price: 7.00, desc: 'Bianco aromatico con profumi intensi di litchi, rosa e spezie dolci.', tags: ['Vino Bianco', 'Popolare'], img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRebbcdLBUalHHEQtP1TUK7WbcmpzWNLJcMZ-SI-WaWQ&s=10' },
+            { id: 650, category: 'vini', name: 'Pecorino (Calice)', price: 7.00, desc: 'Vino bianco abruzzese minerale, strutturato e fresco.', tags: ['Vino Bianco'], img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2Zw6YelpZMTsVOGJZ0HFx_CiUesBRFmUpm-qapncFmg&s=10' },
+            { id: 606, category: 'vini', name: 'Cabernet (Calice)', price: 6.00, desc: 'Vino rosso intenso con note di frutti rossi ed erbacee.', tags: ['Vino Rosso'], img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgB1MCSCRWSlBZKE5Vr78lS4ezKmjkDXPYWluPJ62y5Q&s=10' },
+            { id: 608, category: 'vini', name: 'Merlot (Calice)', price: 6.00, desc: 'Rosso morbido ed avvolgente con spiccati sentori di prugna e ciliegia.', tags: ['Vino Rosso'], img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBe1OfjVY-NWLkj48QR9m4O9du8JoIkZdn9rPloV4FSw&s=10' },
+            { id: 614, category: 'vini', name: 'Nero di Troia (Calice)', price: 7.00, desc: 'Rosso pugliese di carattere, note di mora, liquirizia e spezie.', tags: ['Vino Rosso'], img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSP1ZzPsOqXKNNNvUcdj8jdsQxztUaUjEwkurTrgCtAdw&s=10' },
+            { id: 624, category: 'vini', name: 'Primitivo (Calice)', price: 7.00, desc: 'Rosso salentino intenso, caldo, con sfumature di prugna e vaniglia.', tags: ['Vino Rosso', 'Popolare'], img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFmp9oEMr51NTMrapvXSicAd1gcN8FKS37PzvtzgVz4g&s=10' },
+            { id: 626, category: 'vini', name: 'Cesanese del Piglio (Calice)', price: 7.00, desc: 'L\'eccellenza rossa del Lazio: amarena, violetta e tannini morbidi.', tags: ['Vino Rosso'], img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWGH_RzLX-BwVXhdJHzKQ-BIA7QtxLVrCIvP_ml3UokQ&s=10' },
+            { id: 714, category: 'vini', name: 'Shiraz (Calice)', price: 7.00, desc: 'Vino rosso speziato con note di pepe nero e frutti di bosco.', tags: ['Vino Rosso'], img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOxx1RGDu84hTagU5QGoKHw5qx79CaA_T0R7WWpMpdcg&s' },
+
+            // APERITIVI & TAGLIERI
+            { id: 180, category: 'aperitivi', name: 'Tagliere Freddo', price: 5.00, desc: 'Selezione di salumi e formaggi freddi locali.', img: 'https://images.unsplash.com/photo-1541529086526-db283c563270?auto=format&fit=crop&w=400&q=80' },
+            { id: 181, category: 'aperitivi', name: 'Tagliere Caldo', price: 5.00, desc: 'Assortimento di sfiziosità e stuzzichini caldi.', img: 'https://images.unsplash.com/photo-1541529086526-db283c563270?auto=format&fit=crop&w=400&q=80' },
+            { id: 211, category: 'aperitivi', name: 'Tagliere Caldo / Freddo', price: 6.00, desc: 'Misto aperitivo con stuzzichini caldi e freddi.', img: 'https://images.unsplash.com/photo-1541529086526-db283c563270?auto=format&fit=crop&w=400&q=80' },
+        ];
+
+        // State Management
+        let currentActiveCategory = 'all';
+        let currentActiveTag = 'all';
+        let currentSearchQuery = '';
+        let selectedReviewRating = 0;
+        let selectedReviewTags = [];
+
+        // DOM Initialization
+        document.addEventListener('DOMContentLoaded', () => {
+            loadStoredReviews();
+            renderCategoryTabs();
+            renderMenu();
+            renderReviews();
+            initQrCode('Generale');
+        });
+
+        // Render Tabs
+        function renderCategoryTabs() {
+            const container = document.getElementById('categoryTabs');
+            
+            let html = `
+                <button onclick="setActiveCategory('all')" 
+                    class="category-tab whitespace-nowrap px-4 py-2 rounded-full border border-gold/30 transition flex items-center gap-2 ${currentActiveCategory === 'all' ? 'bg-gold text-onyx font-bold shadow-gold-glow border-gold' : 'bg-onyx-card text-cream hover:border-gold/60'}">
+                    <i class="fa-solid fa-list-ul"></i> Tutti i Piatti
+                </button>
+            `;
+
+            MENU_CATEGORIES.forEach(cat => {
+                const isActive = currentActiveCategory === cat.id;
+                html += `
+                    <button onclick="setActiveCategory('${cat.id}')" 
+                        class="category-tab whitespace-nowrap px-4 py-2 rounded-full border transition flex items-center gap-2 ${isActive ? 'bg-gold text-onyx font-bold shadow-gold-glow border-gold' : 'bg-onyx-card border-gold/20 text-cream-muted hover:text-cream hover:border-gold/50'}">
+                        <i class="fa-solid ${cat.icon} ${isActive ? 'text-onyx' : 'text-gold'}"></i> ${cat.name}
+                    </button>
+                `;
+            });
+
+            container.innerHTML = html;
+        }
+
+        // Set Category
+        function setActiveCategory(catId) {
+            currentActiveCategory = catId;
+            renderCategoryTabs();
+            renderMenu();
+            if (catId !== 'all') {
+                const element = document.getElementById(`section-${catId}`);
+                if (element) {
+                    element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }
+        }
+
+        // Toggle Tag Filter
+        function toggleTagFilter(tag) {
+            currentActiveTag = tag;
+            document.querySelectorAll('.tag-filter').forEach(btn => {
+                btn.classList.remove('bg-gold', 'text-onyx', 'border-gold');
+                btn.classList.add('bg-onyx-card', 'text-cream-muted', 'border-gold/20');
+            });
+            event.currentTarget.classList.remove('bg-onyx-card', 'text-cream-muted', 'border-gold/20');
+            event.currentTarget.classList.add('bg-gold', 'text-onyx', 'border-gold');
+            renderMenu();
+        }
+
+        // Search Handlers
+        function handleSearch() {
+            const val = document.getElementById('searchInput').value.trim();
+            currentSearchQuery = val.toLowerCase();
+            const clearBtn = document.getElementById('clearSearch');
+            
+            if (val.length > 0) {
+                clearBtn.classList.remove('hidden');
+                document.getElementById('searchStats').classList.remove('hidden');
+                document.getElementById('searchQueryTerm').innerText = `"${val}"`;
+            } else {
+                clearBtn.classList.add('hidden');
+                document.getElementById('searchStats').classList.add('hidden');
+            }
+            renderMenu();
+        }
+
+        function clearSearch() {
+            document.getElementById('searchInput').value = '';
+            currentSearchQuery = '';
+            document.getElementById('clearSearch').classList.add('hidden');
+            document.getElementById('searchStats').classList.add('hidden');
+            renderMenu();
+        }
+
+        // Render Menu Items
+        function renderMenu() {
+            const container = document.getElementById('menuSectionsContainer');
+            container.innerHTML = '';
+
+            let categoriesToDisplay = MENU_CATEGORIES;
+            if (currentActiveCategory !== 'all') {
+                categoriesToDisplay = MENU_CATEGORIES.filter(c => c.id === currentActiveCategory);
+            }
+
+            let totalMatches = 0;
+
+            categoriesToDisplay.forEach(cat => {
+                let items = MENU_ITEMS.filter(item => item.category === cat.id);
+
+                // Apply Tag Filter
+                if (currentActiveTag !== 'all') {
+                    items = items.filter(item => item.tags && item.tags.includes(currentActiveTag));
+                }
+
+                // Apply Search Query Filter
+                if (currentSearchQuery !== '') {
+                    items = items.filter(item => 
+                        item.name.toLowerCase().includes(currentSearchQuery) ||
+                        item.desc.toLowerCase().includes(currentSearchQuery) ||
+                        (item.ingredients && item.ingredients.some(i => i.toLowerCase().includes(currentSearchQuery)))
+                    );
+                }
+
+                if (items.length === 0 && currentActiveCategory === 'all' && currentSearchQuery !== '') {
+                    return; // Skip empty section when searching
+                }
+
+                totalMatches += items.length;
+
+                // Section Header
+                const sectionEl = document.createElement('section');
+                sectionEl.id = `section-${cat.id}`;
+                sectionEl.className = 'space-y-6 scroll-mt-28';
+
+                let sectionHtml = `
+                    <div class="border-b border-gold/20 pb-3 flex items-end justify-between">
+                        <div>
+                            <span class="text-gold text-xs uppercase tracking-widest flex items-center gap-2">
+                                <i class="fa-solid ${cat.icon}"></i> Bar Coppola Cassino
+                            </span>
+                            <h2 class="font-serif text-2xl sm:text-3xl font-bold text-cream">${cat.name}</h2>
+                            <p class="text-xs sm:text-sm text-cream-muted mt-0.5">${cat.desc}</p>
+                        </div>
+                        <span class="text-xs text-gold/80 font-mono bg-gold/10 px-2.5 py-1 rounded-full border border-gold/20">
+                            ${items.length} ${items.length === 1 ? 'proposta' : 'proposte'}
+                        </span>
+                    </div>
+                `;
+
+                if (items.length === 0) {
+                    sectionHtml += `
+                        <div class="glass-panel p-8 text-center rounded-2xl space-y-2">
+                            <i class="fa-solid fa-utensils text-2xl text-gold/40"></i>
+                            <p class="text-sm text-cream-muted">Nessuna proposta trovata in questa categoria con i filtri selezionati.</p>
+                        </div>
+                    `;
+                } else {
+                    sectionHtml += `<div class="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">`;
+                    
+                    items.forEach(item => {
+                        const tagsBadgeHtml = item.tags ? item.tags.map(t => {
+                            let tagColor = 'border-gold/30 bg-gold/10 text-gold';
+                            if (t === 'Vegano') tagColor = 'border-emerald-500/30 bg-emerald-500/10 text-emerald-400';
+                            if (t === 'Gluten Free') tagColor = 'border-amber-500/30 bg-amber-500/10 text-amber-400';
+                            if (t === 'Popolare') tagColor = 'border-rose-500/30 bg-rose-500/10 text-rose-400';
+                            return `<span class="text-[10px] uppercase tracking-wider px-2 py-0.5 rounded border ${tagColor}">${t}</span>`;
+                        }).join(' ') : '';
+
+                        sectionHtml += `
+                            <div onclick="openItemModal(${item.id})" class="glass-panel rounded-2xl p-4 sm:p-5 flex gap-4 cursor-pointer group hover:border-gold/70 hover:shadow-gold-glow transition-all duration-300 relative overflow-hidden">
+                                <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-xl overflow-hidden flex-shrink-0 bg-onyx border border-gold/20 relative">
+                                    <img src="${item.img}" alt="${item.name}" onerror="this.src='https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=300&q=80'" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                                </div>
+                                <div class="flex-grow flex flex-col justify-between space-y-1.5">
+                                    <div>
+                                        <div class="flex items-start justify-between gap-2">
+                                            <h3 class="font-serif font-bold text-base sm:text-lg text-cream group-hover:text-gold transition">${item.name}</h3>
+                                            <span class="font-serif font-bold text-base sm:text-lg gold-gradient-text whitespace-nowrap">€${item.price.toFixed(2)}</span>
+                                        </div>
+                                        <p class="text-xs text-cream-muted line-clamp-2 mt-1 leading-relaxed">${item.desc}</p>
+                                    </div>
+                                    <div class="flex flex-wrap items-center gap-1.5 pt-1">
+                                        ${tagsBadgeHtml}
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    });
+
+                    sectionHtml += `</div>`;
+                }
+
+                sectionEl.innerHTML = sectionHtml;
+                container.appendChild(sectionEl);
+            });
+
+            if (totalMatches === 0 && currentSearchQuery !== '') {
+                container.innerHTML = `
+                    <div class="glass-panel p-12 text-center rounded-2xl space-y-4 max-w-md mx-auto">
+                        <i class="fa-solid fa-magnifying-glass text-4xl text-gold/40"></i>
+                        <h3 class="font-serif text-xl font-bold text-cream">Nessun risultato</h3>
+                        <p class="text-xs text-cream-muted">Non abbiamo trovato piatti o bevande corrispondenti a "${currentSearchQuery}". Prova un'altra ricerca.</p>
+                        <button onclick="clearSearch()" class="bg-gold text-onyx font-bold px-4 py-2 rounded-full text-xs shadow-gold-glow">
+                            Azzera Ricerca
+                        </button>
+                    </div>
+                `;
+            }
+        }
+
+        // Open Modal Details
+        function openItemModal(itemId) {
+            const item = MENU_ITEMS.find(i => i.id === itemId);
+            if (!item) return;
+
+            const modalContent = document.getElementById('modalContent');
+            const tagsHtml = item.tags ? item.tags.map(t => `<span class="text-xs px-2.5 py-1 rounded-full border border-gold/40 bg-gold/10 text-gold">${t}</span>`).join(' ') : '';
+            const ingrHtml = item.ingredients ? item.ingredients.map(i => `<li class="flex items-center gap-2"><i class="fa-solid fa-check text-gold text-xs"></i> ${i}</li>`).join('') : '';
+
+            modalContent.innerHTML = `
+                <div class="relative h-48 sm:h-56 w-full overflow-hidden">
+                    <img src="${item.img}" alt="${item.name}" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-onyx-card via-onyx-card/40 to-transparent"></div>
+                    <div class="absolute bottom-4 left-4 right-4 flex justify-between items-end">
+                        <div>
+                            <span class="text-xs text-gold uppercase tracking-wider">Bar Coppola Cassino</span>
+                            <h3 class="font-serif text-2xl font-bold text-cream">${item.name}</h3>
+                        </div>
+                        <span class="font-serif text-2xl font-bold gold-gradient-text">€${item.price.toFixed(2)}</span>
+                    </div>
+                </div>
+                <div class="p-6 space-y-4">
+                    <div class="flex flex-wrap gap-2">${tagsHtml}</div>
+                    
+                    <div>
+                        <h4 class="text-xs font-semibold uppercase tracking-wider text-cream-muted mb-1">Descrizione</h4>
+                        <p class="text-sm text-cream leading-relaxed">${item.desc}</p>
+                    </div>
+
+                    ${item.flavor ? `
+                        <div class="bg-onyx/60 p-3 rounded-xl border border-gold/20">
+                            <span class="text-xs text-gold uppercase tracking-wider font-semibold block mb-0.5"><i class="fa-solid fa-wine-glass text-xs mr-1"></i> Profilo Gustativo</span>
+                            <p class="text-xs text-cream-muted">${item.flavor}</p>
+                        </div>
+                    ` : ''}
+
+                    ${ingrHtml ? `
+                        <div>
+                            <h4 class="text-xs font-semibold uppercase tracking-wider text-cream-muted mb-2">Ingredienti & Note</h4>
+                            <ul class="grid grid-cols-2 gap-2 text-xs text-cream-muted">${ingrHtml}</ul>
+                        </div>
+                    ` : ''}
+
+                    <div class="pt-2 flex gap-3">
+                        <button onclick="closeItemModal()" class="w-full bg-gold text-onyx font-bold py-2.5 rounded-xl text-xs hover:brightness-110 shadow-gold-glow transition">
+                            Chiudi Scheda
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            const modal = document.getElementById('itemModal');
+            const box = document.getElementById('itemModalBox');
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            box.classList.remove('scale-95');
+            box.classList.add('scale-100');
+        }
+
+        function closeItemModal() {
+            const modal = document.getElementById('itemModal');
+            const box = document.getElementById('itemModalBox');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            box.classList.remove('scale-100');
+            box.classList.add('scale-95');
+        }
+
+        // QR Code Generator Logic
+        let qrcodeObj = null;
+
+        function openQrModal() {
+            const modal = document.getElementById('qrModal');
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            generateQrCode();
+        }
+
+        function closeQrModal() {
+            const modal = document.getElementById('qrModal');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+        }
+
+        function generateQrCode() {
+            const tableVal = document.getElementById('qrTableSelect').value;
+            const container = document.getElementById('qrcode');
+            container.innerHTML = '';
+
+            const currentUrl = window.location.href.split('#')[0];
+            const qrUrl = `${currentUrl}?table=${encodeURIComponent(tableVal)}`;
+
+            qrcodeObj = new QRCode(container, {
+                text: qrUrl,
+                width: 180,
+                height: 180,
+                colorDark : "#0c0d10",
+                colorLight : "#ffffff",
+                correctLevel : QRCode.CorrectLevel.H
+            });
+        }
+
+        function downloadQRCode() {
+            const tableVal = document.getElementById('qrTableSelect').value;
+            const img = document.querySelector('#qrcode img');
+            const canvas = document.querySelector('#qrcode canvas');
+
+            let src = '';
+            if (img && img.src) src = img.src;
+            else if (canvas) src = canvas.toDataURL("image/png");
+
+            if (!src) {
+                showToast("Errore nella generazione del QR Code");
+                return;
+            }
+
+            const link = document.createElement('a');
+            link.href = src;
+            link.download = `Bar_Coppola_QR_${tableVal.replace(/\s+/g, '_')}.png`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            showToast(`QR Code scaricato per ${tableVal}!`);
+        }
+
+        // Reviews and Service Rating Functions
+        function loadStoredReviews() {
+            try {
+                const stored = localStorage.getItem('bar_coppola_reviews');
+                if (stored) {
+                    const parsed = JSON.parse(stored);
+                    if (Array.isArray(parsed) && parsed.length > 0) {
+                        REVIEWS_DATA = parsed;
+                    }
+                }
+            } catch (e) {
+                console.warn('Impossibile caricare le recensioni dal local storage', e);
+            }
+        }
+
+        function saveStoredReviews() {
+            try {
+                localStorage.setItem('bar_coppola_reviews', JSON.stringify(REVIEWS_DATA));
+            } catch (e) {
+                console.warn('Impossibile salvare le recensioni nel local storage', e);
+            }
+        }
+
+        function initQrCode(defaultTable = 'Generale') {
+            const tableSelect = document.getElementById('qrTableSelect');
+            if (tableSelect) tableSelect.value = defaultTable;
+        }
+
+        function renderReviews() {
+            const container = document.getElementById('reviewsContainer');
+            const avgScoreEl = document.getElementById('avgRatingScore');
+            const totalCountEl = document.getElementById('totalReviewsCount');
+            const starsEl = document.getElementById('avgRatingStars');
+            
+            if (!container) return;
+
+            const total = REVIEWS_DATA.length;
+            const avg = total > 0 ? (REVIEWS_DATA.reduce((acc, r) => acc + r.rating, 0) / total).toFixed(1) : '5.0';
+
+            if (avgScoreEl) avgScoreEl.innerText = avg;
+            if (totalCountEl) totalCountEl.innerText = `${total} recensioni validate`;
+
+            if (starsEl) {
+                let starsHtml = '';
+                const numAvg = parseFloat(avg);
+                for (let i = 1; i <= 5; i++) {
+                    if (i <= Math.floor(numAvg)) {
+                        starsHtml += '<i class="fa-solid fa-star text-gold"></i>';
+                    } else if (i - 0.5 <= numAvg) {
+                        starsHtml += '<i class="fa-solid fa-star-half-stroke text-gold"></i>';
+                    } else {
+                        starsHtml += '<i class="fa-regular fa-star text-gold/30"></i>';
+                    }
+                }
+                starsEl.innerHTML = starsHtml;
+            }
+
+            let html = '';
+            REVIEWS_DATA.forEach(rev => {
+                let stars = '';
+                for (let i = 1; i <= 5; i++) {
+                    stars += i <= rev.rating 
+                        ? '<i class="fa-solid fa-star text-gold text-xs"></i>' 
+                        : '<i class="fa-regular fa-star text-gold/30 text-xs"></i>';
+                }
+
+                const tagsHtml = rev.tags ? rev.tags.map(t => `<span class="text-[10px] px-2 py-0.5 rounded-full bg-gold/10 text-gold border border-gold/30">${t}</span>`).join(' ') : '';
+
+                html += `
+                    <div class="glass-panel p-5 rounded-xl border border-gold/20 space-y-3 hover:border-gold/40 transition">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h4 class="font-bold text-cream text-sm">${rev.name} <span class="text-xs text-gold font-normal">(${rev.table || 'Tavolo'})</span></h4>
+                                <div class="flex items-center gap-1 mt-0.5">${stars}</div>
+                            </div>
+                            <span class="text-[11px] text-cream-muted">${rev.date}</span>
+                        </div>
+                        <p class="text-xs text-cream-muted leading-relaxed">${rev.comment}</p>
+                        <div class="flex flex-wrap gap-1.5 pt-1">${tagsHtml}</div>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+        }
+
+        function setRating(rating) {
+            selectedReviewRating = rating;
+            const starsContainer = document.getElementById('starRatingSelector');
+            if (!starsContainer) return;
+            
+            const stars = starsContainer.querySelectorAll('i');
+            stars.forEach((star, idx) => {
+                if (idx < rating) {
+                    star.className = 'fa-solid fa-star text-gold text-2xl cursor-pointer transition hover:scale-110';
+                } else {
+                    star.className = 'fa-regular fa-star text-gold/40 text-2xl cursor-pointer transition hover:scale-110';
+                }
+            });
+        }
+
+        function toggleReviewTag(tagBtn, tagName) {
+            if (selectedReviewTags.includes(tagName)) {
+                selectedReviewTags = selectedReviewTags.filter(t => t !== tagName);
+                tagBtn.classList.remove('bg-gold', 'text-onyx', 'border-gold');
+                tagBtn.classList.add('bg-onyx', 'text-cream-muted', 'border-gold/20');
+            } else {
+                selectedReviewTags.push(tagName);
+                tagBtn.classList.remove('bg-onyx', 'text-cream-muted', 'border-gold/20');
+                tagBtn.classList.add('bg-gold', 'text-onyx', 'border-gold');
+            }
+        }
+
+        function submitReview(e) {
+            e.preventDefault();
+            const nameInput = document.getElementById('revName').value.trim();
+            const tableInput = document.getElementById('revTable').value.trim();
+            const commentInput = document.getElementById('revComment').value.trim();
+
+            if (selectedReviewRating === 0) {
+                showToast("Per favore seleziona un punteggio da 1 a 5 stelle.");
+                return;
+            }
+            if (!commentInput) {
+                showToast("Inserisci un breve commento prima di inviare.");
+                return;
+            }
+
+            const newRev = {
+                id: Date.now(),
+                name: nameInput || 'Ospite Anonimo',
+                table: tableInput || 'Tavolo',
+                rating: selectedReviewRating,
+                tags: [...selectedReviewTags],
+                comment: commentInput,
+                date: 'Proprio ora'
+            };
+
+            REVIEWS_DATA.unshift(newRev);
+            saveStoredReviews();
+            renderReviews();
+
+            document.getElementById('reviewForm').reset();
+            setRating(0);
+            selectedReviewTags = [];
+            document.querySelectorAll('.review-tag-btn').forEach(btn => {
+                btn.classList.remove('bg-gold', 'text-onyx', 'border-gold');
+                btn.classList.add('bg-onyx', 'text-cream-muted', 'border-gold/20');
+            });
+
+            if (typeof confetti === 'function') {
+                confetti({
+                    particleCount: 80,
+                    spread: 70,
+                    origin: { y: 0.6 }
+                });
+            }
+
+            showToast("Grazie! La tua recensione è stata pubblicata con successo.");
+        }
+
+        function showToast(message) {
+            let toast = document.getElementById('customToast');
+            if (!toast) {
+                toast = document.createElement('div');
+                toast.id = 'customToast';
+                toast.className = 'fixed bottom-5 right-5 z-50 bg-gold text-onyx font-bold text-xs px-5 py-3 rounded-xl shadow-gold-glow-lg border border-cream transition-all duration-300 transform translate-y-10 opacity-0 flex items-center gap-2';
+                document.body.appendChild(toast);
+            }
+            toast.innerHTML = `<i class="fa-solid fa-circle-check text-base"></i> ${message}`;
+            toast.classList.remove('translate-y-10', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-10', 'opacity-0');
+            }, 3500);
+        }
+    </script>
+</body>
+</html>
